@@ -1,0 +1,12 @@
+.app {
+  min-height: 100vh;
+  background: var(--cream);
+  overflow-x: clip;
+}
+
+.divider-wave {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  margin: 0 auto;
+  max-width: var(--max-w);
+}
