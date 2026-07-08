@@ -68,7 +68,14 @@
 .rev-card:hover {
   background: #fff;
   border-color: var(--cream-3);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+.rev-card {
+  will-change: transform;
+}
+.rev-aggregate-score {
+  font-variant-numeric: tabular-nums;
 }
 .rev-body {
   margin: 0;

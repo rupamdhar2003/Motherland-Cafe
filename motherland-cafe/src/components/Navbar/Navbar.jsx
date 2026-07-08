@@ -1,21 +1,12 @@
 import { useEffect, useState } from 'react';
 import './Navbar.css';
+import MotherlandMark from '../icons/MotherlandMark.jsx';
 
 function BrandMark({ label }) {
   return (
     <a href="#top" className="brand" aria-label={`${label} — home`}>
       <span className="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="26" height="26">
-          <circle cx="16" cy="16" r="15" fill="var(--forest)" />
-          <path
-            d="M9 22 V11 l7 9 7-9 v11"
-            fill="none"
-            stroke="var(--cream)"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <MotherlandMark size={26} color="var(--forest)" />
       </span>
       <span className="brand-word">
         <span className="brand-word-top">{label}</span>

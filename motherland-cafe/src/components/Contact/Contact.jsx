@@ -1,19 +1,22 @@
 import './Contact.css';
 import WhatsappIcon from '../icons/WhatsappIcon.jsx';
+import { useReveal } from '../../hooks/useReveal.js';
 
 export default function Contact({ contact }) {
   const waUrl = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(contact.whatsappText)}`;
+  const card = useReveal({ threshold: 0.15 });
+  const methods = useReveal({ threshold: 0.2 });
 
   return (
     <section className="contact section" id="contact">
       <div className="container">
-        <div className="contact-card">
+        <div ref={card.ref} className={`contact-card on-scroll on-scroll--scale ${card.visible ? 'is-visible' : ''}`}>
         <div className="contact-copy">
           <span className="eyebrow">{contact.eyebrow}</span>
           <h2 className="display-2 contact-title">{contact.headline}</h2>
           <p className="lead contact-sub">{contact.sub}</p>
 
-          <div className="contact-methods">
+          <div ref={methods.ref} className={`contact-methods stagger ${methods.visible ? 'is-visible' : ''}`}>
             <a className="contact-method" href={waUrl} target="_blank" rel="noopener noreferrer">
               <span className="contact-method-icon" style={{ background: '#25D366' }}>
                 <WhatsappIcon size={22} color="#fff" />

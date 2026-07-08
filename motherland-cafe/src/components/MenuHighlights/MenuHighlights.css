@@ -42,15 +42,20 @@
   border-radius: var(--r-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--dur-med) var(--ease),
-              border-color var(--dur-med) var(--ease),
-              transform var(--dur-med) var(--ease);
+  transition: box-shadow 350ms var(--ease),
+              border-color 350ms var(--ease),
+              transform 350ms var(--ease);
   cursor: default;
+  will-change: transform;
 }
 .menu-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   border-color: var(--cream-3);
+  transform: translateY(-4px);
 }
+
+.menu-feature-wrap { min-width: 0; }
+.menu-feature-wrap .menu-card { height: 100%; }
 
 .menu-card-media {
   position: relative;

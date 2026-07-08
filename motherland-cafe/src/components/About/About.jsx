@@ -1,4 +1,5 @@
 import './About.css';
+import { useReveal } from '../../hooks/useReveal.js';
 
 const ICONS = {
   wifi: (
@@ -36,10 +37,14 @@ function AmenityIcon({ name }) {
 }
 
 export default function About({ about }) {
+  const figure = useReveal();
+  const copy = useReveal({ threshold: 0.2 });
+  const amenities = useReveal({ threshold: 0.25 });
+
   return (
     <section className="about section" id="about">
       <div className="container about-grid">
-        <figure className="about-figure">
+        <figure ref={figure.ref} className={`about-figure on-scroll ${figure.visible ? 'is-visible' : ''}`}>
           <img src={about.image} alt={about.imageAlt} loading="lazy" />
           <div className="about-figure-tag">
             <span className="eyebrow">Chowringhee, Kolkata</span>
@@ -51,14 +56,18 @@ export default function About({ about }) {
           </div>
         </figure>
 
-        <div className="about-copy">
+        <div ref={copy.ref} className={`about-copy on-scroll ${copy.visible ? 'is-visible' : ''}`}>
           <span className="eyebrow">{about.eyebrow}</span>
           <h2 className="display-2 about-title">{about.headline}</h2>
           {about.body.map((p, i) => (
             <p className="lead about-para" key={i}>{p}</p>
           ))}
 
-          <ul className="about-amenities" aria-label="What we offer">
+          <ul
+            ref={amenities.ref}
+            className={`about-amenities stagger ${amenities.visible ? 'is-visible' : ''}`}
+            aria-label="What we offer"
+          >
             {about.amenities.map((a) => (
               <li key={a.label} className="about-amenity">
                 <span className="about-amenity-icon">

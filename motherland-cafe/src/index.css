@@ -249,6 +249,85 @@ ul, ol { margin: 0; }
 .reveal-delay-3 { animation-delay: 320ms; }
 .reveal-delay-4 { animation-delay: 440ms; }
 
+/* Scroll-triggered reveal (paired with useReveal hook) */
+.on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease),
+              transform 700ms var(--ease);
+  will-change: opacity, transform;
+}
+.on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.on-scroll--right {
+  transform: translateX(-24px);
+}
+.on-scroll--right.is-visible {
+  transform: translateX(0);
+}
+.on-scroll--scale {
+  transform: scale(0.96) translateY(16px);
+}
+.on-scroll--scale.is-visible {
+  transform: scale(1) translateY(0);
+}
+
+/* Stagger utilities — apply to children after parent is is-visible */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease),
+              transform 600ms var(--ease);
+}
+.stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger.is-visible > *:nth-child(1) { transition-delay: 60ms; }
+.stagger.is-visible > *:nth-child(2) { transition-delay: 120ms; }
+.stagger.is-visible > *:nth-child(3) { transition-delay: 180ms; }
+.stagger.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+.stagger.is-visible > *:nth-child(5) { transition-delay: 300ms; }
+.stagger.is-visible > *:nth-child(6) { transition-delay: 360ms; }
+.stagger.is-visible > *:nth-child(7) { transition-delay: 420ms; }
+.stagger.is-visible > *:nth-child(8) { transition-delay: 480ms; }
+
+/* Pulsing dot — for map marker */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  70%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulse-ring 2.2s var(--ease) infinite;
+  z-index: -1;
+}
+
+/* Gentle idle drift */
+@keyframes drift {
+  0%,100% { transform: translate3d(0,0,0); }
+  50%     { transform: translate3d(0,-6px,0); }
+}
+.drift { animation: drift 6s ease-in-out infinite; }
+.drift--slow { animation: drift 9s ease-in-out infinite; }
+.drift--fast { animation: drift 4.5s ease-in-out infinite; }
+
+/* Shimmer for glowing accents */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;

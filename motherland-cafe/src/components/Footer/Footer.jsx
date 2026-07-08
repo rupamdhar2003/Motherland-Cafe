@@ -1,4 +1,5 @@
 import './Footer.css';
+import MotherlandMark from '../icons/MotherlandMark.jsx';
 
 export default function Footer({ brand, footer }) {
   const year = new Date().getFullYear();
@@ -9,17 +10,7 @@ export default function Footer({ brand, footer }) {
         <div className="footer-brand">
           <div className="footer-brand-row">
             <span className="footer-brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 32 32" width="32" height="32">
-                <circle cx="16" cy="16" r="15" fill="var(--cream)" />
-                <path
-                  d="M9 22 V11 l7 9 7-9 v11"
-                  fill="none"
-                  stroke="var(--forest)"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <MotherlandMark size={32} color="var(--cream)" />
             </span>
             <div>
               <div className="footer-brand-word">{brand.wordmark}</div>

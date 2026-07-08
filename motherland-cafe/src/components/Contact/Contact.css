@@ -72,9 +72,13 @@
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+.contact-method {
+  will-change: transform;
+}
 .contact-method:hover {
   background: rgba(255,255,255,0.14);
   border-color: rgba(251,246,238,0.36);
+  transform: translateY(-2px);
 }
 .contact-method-icon {
   display: grid;

@@ -1,4 +1,5 @@
 import './MenuHighlights.css';
+import { useReveal } from '../../hooks/useReveal.js';
 
 function MenuCard({ item, feature = false }) {
   return (
@@ -28,11 +29,17 @@ function MenuCard({ item, feature = false }) {
 
 export default function MenuHighlights({ menu }) {
   const [feature, ...rest] = menu.items;
+  const head = useReveal();
+  const featureReveal = useReveal({ threshold: 0.15 });
+  const restReveal = useReveal({ threshold: 0.1 });
 
   return (
     <section className="menu section" id="menu">
       <div className="container">
-        <header className="menu-head">
+        <header
+          ref={head.ref}
+          className={`menu-head on-scroll ${head.visible ? 'is-visible' : ''}`}
+        >
           <div>
             <span className="eyebrow">{menu.eyebrow}</span>
             <h2 className="display-2 menu-title">{menu.headline}</h2>
@@ -41,8 +48,16 @@ export default function MenuHighlights({ menu }) {
         </header>
 
         <div className="menu-grid">
-          <MenuCard item={feature} feature />
-          <div className="menu-rest">
+          <div
+            ref={featureReveal.ref}
+            className={`menu-feature-wrap on-scroll on-scroll--scale ${featureReveal.visible ? 'is-visible' : ''}`}
+          >
+            <MenuCard item={feature} feature />
+          </div>
+          <div
+            ref={restReveal.ref}
+            className={`menu-rest stagger ${restReveal.visible ? 'is-visible' : ''}`}
+          >
             {rest.map((it) => (
               <MenuCard key={it.title} item={it} />
             ))}

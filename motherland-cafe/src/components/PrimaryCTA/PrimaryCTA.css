@@ -261,11 +261,28 @@
   border: 1px solid transparent;
   box-shadow: var(--shadow-sm);
   transition: background var(--dur-med) var(--ease),
-              box-shadow var(--dur-med) var(--ease);
+              box-shadow var(--dur-med) var(--ease),
+              transform var(--dur-fast) var(--ease);
 }
 .reserve-submit-btn--wa:hover:not(:disabled) {
   background: #1EBE5A;
   box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.reserve-submit-btn--wa:active:not(:disabled) {
+  transform: translateY(0);
+}
+.btn-primary {
+  transition: background var(--dur-med) var(--ease),
+              color var(--dur-med) var(--ease),
+              box-shadow var(--dur-med) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
 }
 .reserve-submit-note {
   display: block;

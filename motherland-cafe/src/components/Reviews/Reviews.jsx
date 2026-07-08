@@ -1,4 +1,6 @@
 import './Reviews.css';
+import { useReveal } from '../../hooks/useReveal.js';
+import { useCountUp } from '../../hooks/useCountUp.js';
 
 function Stars({ n = 5 }) {
   return (
@@ -21,25 +23,38 @@ function Initials({ name, color }) {
 const AVATAR_COLORS = ['var(--terra)', 'var(--forest)', 'var(--gold)'];
 
 export default function Reviews({ reviews }) {
+  const head = useReveal();
+  const grid = useReveal({ threshold: 0.1 });
+  const score = useCountUp(parseFloat(reviews.aggregate.score), { duration: 1200, decimals: 1 });
+  const count = useCountUp(parseInt(String(reviews.aggregate.reviews).replace(/,/g, ''), 10), { duration: 1600 });
+
+  const formatCount = (n) => Number(n).toLocaleString('en-IN');
+
   return (
     <section className="reviews section" id="reviews">
       <div className="container">
-        <header className="rev-head">
+        <header
+          ref={head.ref}
+          className={`rev-head on-scroll ${head.visible ? 'is-visible' : ''}`}
+        >
           <div>
             <span className="eyebrow">{reviews.eyebrow}</span>
             <h2 className="display-2 rev-title">{reviews.headline}</h2>
           </div>
 
           <div className="rev-aggregate">
-            <div className="rev-aggregate-score">{reviews.aggregate.score}</div>
+            <div ref={score.ref} className="rev-aggregate-score">{score.value}</div>
             <div className="rev-aggregate-body">
               <Stars n={5} />
-              <span>{reviews.aggregate.reviews} reviews on {reviews.aggregate.source}</span>
+              <span ref={count.ref}>{formatCount(count.value)} reviews on {reviews.aggregate.source}</span>
             </div>
           </div>
         </header>
 
-        <div className="rev-grid">
+        <div
+          ref={grid.ref}
+          className={`rev-grid stagger ${grid.visible ? 'is-visible' : ''}`}
+        >
           {reviews.items.map((r, i) => (
             <article className="rev-card" key={r.author}>
               <Stars n={r.rating} />

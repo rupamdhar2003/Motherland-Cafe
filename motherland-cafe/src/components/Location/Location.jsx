@@ -1,4 +1,5 @@
 import './Location.css';
+import { useReveal } from '../../hooks/useReveal.js';
 
 function DayRow({ day, open, close, isToday }) {
   return (
@@ -16,13 +17,13 @@ function DayRow({ day, open, close, isToday }) {
 
 export default function Location({ location }) {
   const todayIdx = (new Date().getDay() + 6) % 7; // JS: Sun=0. We want Mon=0.
-
-  const mapsEmbed = `https://www.google.com/maps/embed/v1/place?key=DEMO_KEY_REPLACE_ME&q=place_id:${location.placeId}`;
+  const map = useReveal();
+  const panel = useReveal({ threshold: 0.2 });
 
   return (
     <section className="location section" id="location">
       <div className="container loc-grid">
-        <div className="loc-map">
+        <div ref={map.ref} className={`loc-map on-scroll ${map.visible ? 'is-visible' : ''}`}>
           <div className="loc-map-frame">
             {/* No-API-key fallback: static iframe using search query. Swap for embed API when you have a key. */}
             <iframe
@@ -48,7 +49,7 @@ export default function Location({ location }) {
           </div>
         </div>
 
-        <div className="loc-panel">
+        <div ref={panel.ref} className={`loc-panel on-scroll ${panel.visible ? 'is-visible' : ''}`}>
           <span className="eyebrow">{location.eyebrow}</span>
           <h2 className="display-2 loc-title">{location.headline}</h2>
 

@@ -56,6 +56,25 @@
   background: var(--terra);
   color: #fff;
   flex-shrink: 0;
+  position: relative;
+}
+.loc-map-badge-marker::before,
+.loc-map-badge-marker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid var(--terra);
+  opacity: 0;
+  animation: loc-pulse 2.6s var(--ease) infinite;
+}
+.loc-map-badge-marker::after {
+  animation-delay: 1.3s;
+}
+@keyframes loc-pulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
 }
 .loc-map-badge-title {
   font-family: var(--font-display);
